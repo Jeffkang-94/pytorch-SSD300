@@ -28,7 +28,6 @@ test_dataset = PascalVOCDataset(data_folder,
                                 keep_difficult=keep_difficult)
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size, shuffle=False,
                                           collate_fn=test_dataset.collate_fn, num_workers=workers, pin_memory=True)
-from CAPNET.pgd import PGDAttacker
 
 def evaluate(test_loader, model):
     """
@@ -39,7 +38,6 @@ def evaluate(test_loader, model):
 
     # Make sure it's in eval mode
     model.eval()
-    attacker = PGDAttacker(attack_eps=4.0/255.0)
 
     # Lists to store detected and true boxes, labels, scores
     det_boxes = list()
@@ -55,10 +53,8 @@ def evaluate(test_loader, model):
             images = images.to(device)  # (N, 3, 300, 300)
             labels = [l.to(device) for l in labels]
             boxes = [b.to(device) for b in boxes]
-            with torch.enable_grad():
-                adv_output = attacker.voc_fgsm(images,labels,boxes, model, eps=4.0/255.0, random_init=True, clamp=(0,1))
             # Forward prop.
-            predicted_locs, predicted_scores = model(adv_output)
+            predicted_locs, predicted_scores = model(images)
             # Detect objects in SSD output
             det_boxes_batch, det_labels_batch, det_scores_batch = model.detect_objects(predicted_locs, predicted_scores,
                                                                                         min_score=0.01, max_overlap=0.45,

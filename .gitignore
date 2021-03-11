@@ -1,0 +1,5 @@
+img/*
+.vscode/*
+__pycache__/*
+*.json
+*.tar

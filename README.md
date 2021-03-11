@@ -13,9 +13,7 @@ This code supports `pytorch 1.0 >` in `python 3.6`.
 <img src="./asset/baseball.gif">
 </p>
 
-We will be implementing the [Single Shot Multibox Detector (SSD)](https://arxiv.org/abs/1512.02325), a popular, powerful, and especially nimble network for this task. The authors' original implementation can be found [here](https://github.com/weiliu89/caffe/tree/ssd).
-
-Here are some examples of object detection in images not seen during training –
+This repository addresses [Single Shot Multibox Detector (SSD)](https://arxiv.org/abs/1512.02325), a popular, powerful, and especially nimble network for this task. The authors' original implementation can be found [here](https://github.com/weiliu89/caffe/tree/ssd).
 
 # Usage
 
@@ -65,10 +63,12 @@ grad_clip = None  # clip if gradients are exploding, which may happen at larger 
 ```
 
 ## Test model
-We provide a pre-trained model with [pre-trained model](https://drive.google.com/drive/folders/1oynOave6VTud374jZ1Ky7VbpCnUuyFRw?usp=sharing).  
-You can download it using above link or using command  
+We provide a pre-trained model with [pre-trained model](https://drive.google.com/file/d/10ofPKSFnYMhm0Yh8IvdHBxJJhFjG1Qck/view).  
+You can download it using above link or using shell file [download.sh](https://github.com/Jeffkang-94/pytorch-SSD300/blob/master/asset/download.sh)
+
 ```
-wget https://drive.google.com/drive/folders/1oynOave6VTud374jZ1Ky7VbpCnUuyFRw?usp=sharing
+cd asset
+bash download.sh
 ```
 
 You can detect objects based on single image using [detect.py](https://github.com/Jeffkang-94/pytorch-SSD300/blob/master/detect.py).  
@@ -81,9 +81,10 @@ if __name__ == '__main__':
     annotated_image = detect(original_image, min_score=0.2, max_overlap=0.5, top_k=200)
     annotated_image.save('[Name of result image]') # e.g., ./result.jpg
 ```
-
 ### Result Image 
 
 <p align="center">
 <img src="./asset/result.jpg">
 </p>
+
+### Evaluation 

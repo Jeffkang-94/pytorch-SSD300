@@ -18,6 +18,9 @@ This repository addresses [Single Shot Multibox Detector (SSD)](https://arxiv.or
 
 # Usage
 
+Quick overview of entire procedure.  
+We elaborate on the procedure with the following sections.  
+
 ## Overall Training
 ```
 cd asset
